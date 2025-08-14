@@ -29,9 +29,22 @@
 		2A6086062E4D95B000EF03BB /* SwiftCafeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCafeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4E3EA3BC2E4E0A6800307EEB /* Exceptions for "SwiftCafe" folder in "SwiftCafe" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A6085EB2E4D95AF00EF03BB /* SwiftCafe */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2A6085EE2E4D95AF00EF03BB /* SwiftCafe */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4E3EA3BC2E4E0A6800307EEB /* Exceptions for "SwiftCafe" folder in "SwiftCafe" target */,
+			);
 			path = SwiftCafe;
 			sourceTree = "<group>";
 		};
@@ -396,7 +409,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftCafe/Preview Content\"";
-				DEVELOPMENT_TEAM = VBMU6S3C4T;
+				DEVELOPMENT_TEAM = S3AP74B5TH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -425,7 +438,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SwiftCafe/Preview Content\"";
-				DEVELOPMENT_TEAM = VBMU6S3C4T;
+				DEVELOPMENT_TEAM = S3AP74B5TH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
