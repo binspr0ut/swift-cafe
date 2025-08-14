@@ -18,6 +18,8 @@ class CustomerViewModel: ObservableObject {
     @Published var isConnectedToAdmin = false
     @Published var orderStatus: OrderStatus?
     @Published var showingOrderConfirmation = false
+    @Published var activeOrder: Order?
+    @Published var orderHistory: [Order] = []
     
     let tableNumber: Int
     private var modelContext: ModelContext
@@ -26,6 +28,23 @@ class CustomerViewModel: ObservableObject {
     var orderTotal: Double {
         currentOrder.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
     }
+    
+    var estimatedPreparationTime: Int {
+        // Estimate 5-15 minutes per item based on quantity
+        currentOrder.reduce(0) { total, item in
+            total + (10 * item.quantity) // 10 minutes per item as default
+        }
+    }
+    
+    var availableCategories: [String] {
+        Array(Set(menuItems.map { $0.category })).sorted()
+    }
+    
+    var hasActiveOrder: Bool {
+        activeOrder != nil && ![.completed, .cancelled].contains(activeOrder?.status)
+    }
+    
+    private var preparationTimeMapping: [UUID: Int] = [:]
     
     init(modelContext: ModelContext, tableNumber: Int) {
         self.modelContext = modelContext
@@ -74,17 +93,29 @@ class CustomerViewModel: ObservableObject {
         multipeerService.startBrowsing()
     }
     
-    func addItemToOrder(_ menuItem: MenuItem) {
-        if let existingItem = currentOrder.first(where: { $0.menuItemId == menuItem.id }) {
+    func addItemToOrder(_ menuItem: MenuItem, specialInstructions: String = "") {
+        if let existingItem = currentOrder.first(where: { 
+            $0.menuItemId == menuItem.id && $0.specialInstructions == specialInstructions 
+        }) {
             existingItem.quantity += 1
         } else {
             let orderItem = OrderItem(
                 menuItemId: menuItem.id,
                 name: menuItem.name,
                 price: menuItem.price,
-                quantity: 1
+                quantity: 1,
+                specialInstructions: specialInstructions.isEmpty ? nil : specialInstructions
             )
             currentOrder.append(orderItem)
+        }
+    }
+    
+    func addToCart(item: MenuItem, quantity: Int = 1, specialInstructions: String = "") {
+        addItemToOrder(item, specialInstructions: specialInstructions)
+        if quantity > 1 {
+            if let lastItem = currentOrder.last {
+                lastItem.quantity = quantity
+            }
         }
     }
     
@@ -100,10 +131,14 @@ class CustomerViewModel: ObservableObject {
         }
     }
     
-    func placeOrder() {
+    func placeOrder(customerNotes: String = "") {
         guard !currentOrder.isEmpty else { return }
         
-        let order = Order(tableNumber: tableNumber, orderItems: currentOrder)
+        let order = Order(
+            tableNumber: tableNumber, 
+            orderItems: currentOrder,
+            customerNotes: customerNotes
+        )
         
         // Save locally first
         modelContext.insert(order)
@@ -115,12 +150,43 @@ class CustomerViewModel: ObservableObject {
             multipeerService.sendOrder(order)
             
             // Clear current order and show confirmation
+            activeOrder = order
             currentOrder.removeAll()
             showingOrderConfirmation = true
             orderStatus = .pending
             
         } catch {
             print("Error saving order: \(error)")
+        }
+    }
+    
+    func callStaff(reason: String) {
+        let staffCall = StaffCall(
+            tableNumber: tableNumber,
+            reason: reason,
+            timestamp: Date()
+        )
+        
+        // Send staff call to admin - we'll implement this in MultipeerService
+        print("Staff called for table \(tableNumber): \(reason)")
+    }
+    
+    func loadActiveOrder() {
+        // Implementation to load any active order for this table
+        let currentTableNumber = self.tableNumber
+        let descriptor = FetchDescriptor<Order>(
+            sortBy: [SortDescriptor(\Order.dateCreated, order: .reverse)]
+        )
+        
+        do {
+            let allOrders = try modelContext.fetch(descriptor)
+            activeOrder = allOrders.first { order in
+                order.tableNumber == currentTableNumber &&
+                order.status != .completed &&
+                order.status != .cancelled
+            }
+        } catch {
+            print("Error loading active order: \(error)")
         }
     }
     

@@ -60,9 +60,16 @@
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Swift Cafe uses local network to connect iPads in the cafe for real-time order management and menu synchronization.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Swift Cafe uses Bluetooth to discover and connect to nearby iPads in the cafe for seamless order management.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Swift Cafe uses Bluetooth to allow nearby iPads to discover this device for cafe networking.</string>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_swift-cafe._tcp</string>
+		<string>_cafe._tcp</string>
+		<string>_cafe._udp</string>
 	</array>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>

@@ -123,5 +123,5 @@ struct DeviceSetupView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [MenuItem.self, Order.self, OrderItem.self, CafeSettings.self, Table.self], inMemory: true)
+        .modelContainer(for: [MenuItem.self, Order.self, OrderItem.self, CafeSettings.self, Table.self, StaffCall.self], inMemory: true)
 }

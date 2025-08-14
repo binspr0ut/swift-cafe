@@ -1,8 +1,62 @@
-# Swift Cafe - Smart Cashier System
+# SwiftCafe - Smart Cashier System
 
-A comprehensive smart cashier app for cafes built entirely for the Apple ecosystem using SwiftUI, SwiftData, and MultipeerConnectivity.
+## Project Overview
 
-## System Overview
+SwiftCafe is a comprehensive smart cashier system designed for cafes, built entirely within the Apple ecosystem. The system consists of 7 iPads total:
+- **6 Customer iPads**: Placed at cafe tables for menu browsing and ordering
+- **1 Admin iPad**: For staff to manage orders, customize customer interface, and monitor operations
+
+## ✅ COMPLETE IMPLEMENTATION STATUS
+
+### Admin iPad - ✅ FULLY IMPLEMENTED
+- **Order Management**: Real-time view of all customer orders with status tracking
+- **Menu Editing**: Full CRUD operations for menu items with categories
+- **Cafe Customization**: Background images, button colors, branding, themes
+- **Table Monitoring**: Status of all 6 customer tables
+- **Staff Call Management**: Handle customer assistance requests
+- **Real-time Updates**: Live synchronization with customer iPads
+
+### Customer iPad - ✅ FULLY IMPLEMENTED
+- **Professional Menu Interface**: iPad-optimized with category selector and grid layout
+- **Advanced Cart Management**: Special instructions, quantity controls, real-time pricing
+- **Order Status Tracking**: Multi-stage progress indicators and estimated times
+- **Staff Call System**: Categorized assistance requests with custom options
+- **Menu Item Details**: Full descriptions, customization options, add to cart
+- **Responsive Design**: Adapts to admin-configured branding and themes
+
+## Architecture
+
+### Technology Stack
+- **SwiftUI**: Modern UI framework for all interfaces
+- **SwiftData**: Apple's persistence framework for data storage
+- **MultipeerConnectivity**: Zero-configuration networking for iPad-to-iPad communication
+- **MVVM Pattern**: Clean architecture with ViewModels and Observable objects
+
+### Data Models ✅ COMPLETE
+1. **MenuItem**: Menu items with categories, prices, descriptions, and images
+2. **Order**: Customer orders with items, status, and metadata
+3. **OrderItem**: Individual items within orders with quantities and special instructions
+4. **CafeSettings**: Customizable cafe branding and UI themes
+5. **Table**: Table information and status tracking
+6. **StaffCall**: Customer requests for staff assistance
+
+## Key Features Implemented
+
+### 🎯 Admin iPad Features
+- **Split-view Dashboard**: iOS-compatible navigation with order management
+- **Real-time Order Tracking**: Live updates of customer orders across all tables
+- **Complete Menu Management**: Add, edit, delete menu items with categories
+- **Dynamic Customization**: Change customer iPad themes, colors, backgrounds in real-time
+- **Table Status Monitoring**: Visual overview of all 6 customer tables
+- **Staff Call Handling**: Receive and manage customer assistance requests
+
+### 🎯 Customer iPad Features
+- **Modern Menu Interface**: Professional grid layout with category filtering
+- **Enhanced Cart System**: Special instructions, quantity controls, order notes
+- **Real-time Order Tracking**: Progress indicators with status badges
+- **Staff Communication**: Easy staff call with categorized request types
+- **Item Detail Views**: Full descriptions with customization options
+- **Responsive Branding**: UI adapts to admin-configured themes
 
 Swift Cafe is designed for a cafe setup with:
 - **6 Customer iPads**: Placed at tables for customers to view menus and place orders

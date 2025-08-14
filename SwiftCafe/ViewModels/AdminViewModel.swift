@@ -23,12 +23,13 @@ class AdminViewModel: ObservableObject {
     @Published var showingMenuEditor = false
     
     private var context: ModelContext
-    private let multipeerService: MultipeerService
+    let multipeerService: MultipeerService
     
     enum AdminTab: String, CaseIterable {
         case orders = "Orders"
         case menu = "Menu"
         case tables = "Tables"
+        case connections = "Connections"
         case settings = "Settings"
         
         var icon: String {
@@ -36,6 +37,7 @@ class AdminViewModel: ObservableObject {
             case .orders: return "list.clipboard"
             case .menu: return "menucard"
             case .tables: return "table.furniture"
+            case .connections: return "wifi"
             case .settings: return "gearshape"
             }
         }

@@ -83,6 +83,8 @@ struct AdminDashboardView: View {
             MenuManagementView(viewModel: viewModel)
         case .tables:
             TablesOverviewView(viewModel: viewModel)
+        case .connections:
+            ConnectionStatusView(multipeerService: viewModel.multipeerService)
         case .settings:
             CafeCustomizationView(viewModel: viewModel)
         }

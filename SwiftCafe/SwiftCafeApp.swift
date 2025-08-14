@@ -17,7 +17,8 @@ struct SwiftCafeApp: App {
             Order.self,
             OrderItem.self,
             CafeSettings.self,
-            Table.self
+            Table.self,
+            StaffCall.self
         ])
         
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
